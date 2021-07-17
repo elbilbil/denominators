@@ -68,9 +68,9 @@
     <v-dialog
       v-model="dialog"
       persistent
-      max-width="290"
+      width="80%"
     >
-      <v-card>
+      <v-card class="text-center">
         <v-card-title>
           Almost. Learn why your answer was wrong:
         </v-card-title>
@@ -79,25 +79,9 @@
           src="../assets/explanation.mp4"
           type="video/mp4"
           autoplay="false"
-          width="100%"
+          width="60%"
           @canplay="updatePaused" @playing="updatePaused" @pause="updatePaused">
         </video>
-        <div class="controls text-left">
-          <v-btn v-show="paused" @click="play" text icon>
-                <v-icon
-                  large
-                >
-                  mdi-play
-                </v-icon>
-          </v-btn>
-          <v-btn v-show="playing" @click="pause" text icon>
-                <v-icon
-                  large
-                >
-                  mdi-pause
-                </v-icon>
-          </v-btn>
-        </div>
         <v-card-actions>
           <v-btn
             color="red darken-1"
