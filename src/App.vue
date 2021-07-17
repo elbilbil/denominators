@@ -8,6 +8,8 @@
      <v-app-bar-nav-icon class="mx-6" tile v-for="item in 7" :key="item">Level {{item}}
      </v-app-bar-nav-icon>
      <v-spacer></v-spacer>
+     <v-btn class="mr-3" light><router-link class="nav-link" to="/leaderboard">Leaderboard</router-link>
+     </v-btn>
      <v-avatar
       color="secondary"
       size="42"
@@ -15,23 +17,7 @@
     </v-app-bar>
 
     <v-main>
-      <HelloWorld/>
+      <router-view/>
     </v-main>
   </v-app>
 </template>
-
-<script>
-import HelloWorld from './components/HelloWorld'
-
-export default {
-  name: 'App',
-
-  components: {
-    HelloWorld
-  },
-
-  data: () => ({
-    //
-  })
-}
-</script>
