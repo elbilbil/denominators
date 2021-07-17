@@ -14,29 +14,13 @@
               </h2>
               <div>
                 <video
-                id="videoElement"
+                controls
                 src="../assets/teachingMultiplication.mp4"
                 type="video/mp4"
-                autoplay=false
+                autoplay="false"
                 muted
                 width="100%"
-                @canplay="updatePaused" @playing="updatePaused" @pause="updatePaused"></video>
-                <div class="controls text-left">
-                  <v-btn v-show="paused" @click="play" text icon>
-                        <v-icon
-                          large
-                        >
-                          mdi-play
-                        </v-icon>
-                  </v-btn>
-                  <v-btn v-show="playing" @click="pause" text icon>
-                        <v-icon
-                          large
-                        >
-                          mdi-pause
-                        </v-icon>
-                  </v-btn>
-                </div>
+                ></video>
               </div>
             </v-card>
           </v-col>
@@ -73,6 +57,51 @@
       </v-col>
 
     </v-row>
+
+    <v-dialog
+      v-model="dialog"
+      persistent
+      max-width="290"
+    >
+      <v-card>
+        <v-card-title>
+          Almost. Learn why your answer was wrong:
+        </v-card-title>
+        <video
+          id="videoElement"
+          src="../assets/explanation.mp4"
+          type="video/mp4"
+          autoplay="false"
+          width="100%"
+          @canplay="updatePaused" @playing="updatePaused" @pause="updatePaused">
+        </video>
+        <div class="controls text-left">
+          <v-btn v-show="paused" @click="play" text icon>
+                <v-icon
+                  large
+                >
+                  mdi-play
+                </v-icon>
+          </v-btn>
+          <v-btn v-show="playing" @click="pause" text icon>
+                <v-icon
+                  large
+                >
+                  mdi-pause
+                </v-icon>
+          </v-btn>
+        </div>
+        <v-card-actions>
+          <v-btn
+            color="red darken-1"
+            text
+            @click="closeModal()"
+          >
+            Close
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -81,6 +110,7 @@ export default {
   name: 'HelloWorld',
 
   data: () => ({
+    dialog: false,
     videoElement: null,
     paused: null,
     answers: [
@@ -96,19 +126,22 @@ export default {
       this.paused = event.target.paused
     },
     play () {
-      console.log('PLAY')
       this.videoElement.play()
     },
     pause () {
-      console.log('PAUSE')
       this.videoElement.pause()
     },
     evaluateAnswer (input) {
       if (input) {
+        // raise XP -> alert
         console.log('CORRECT')
       } else {
-        console.log('FALSE')
+        this.dialog = true
       }
+    },
+    closeModal () {
+      this.dialog = false
+      this.videoElement.pause()
     }
   },
   computed: {
