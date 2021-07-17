@@ -1,5 +1,12 @@
 <template>
   <v-container>
+    <v-alert
+    type="success"
+    transition="fade-transition"
+    :value="alert"
+    >
+    Excellent! You have gained <strong>+50</strong> XP
+    </v-alert>
     <v-row class="text-center">
 
       <v-col class="mb-4">
@@ -110,6 +117,7 @@ export default {
   name: 'HelloWorld',
 
   data: () => ({
+    alert: false,
     dialog: false,
     videoElement: null,
     paused: null,
@@ -133,8 +141,7 @@ export default {
     },
     evaluateAnswer (input) {
       if (input) {
-        // raise XP -> alert
-        console.log('CORRECT')
+        this.showAlert()
       } else {
         this.dialog = true
       }
@@ -142,6 +149,12 @@ export default {
     closeModal () {
       this.dialog = false
       this.videoElement.pause()
+    },
+    showAlert () {
+      this.alert = true
+      window.setInterval(() => {
+        this.alert = false
+      }, 3000) // visible for 3 seconds, then hidden again
     }
   },
   computed: {
