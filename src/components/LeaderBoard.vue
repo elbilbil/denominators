@@ -29,7 +29,7 @@
                             </v-card>
                         </v-col>
                         <v-col cols="5">
-                            <v-card class="space_first_place">
+                            <v-card class="space_first_place" elevation="8">
                                 <v-card-title class="text-h1">1</v-card-title>
                                 <v-card-text class="ml-2">
                                     <v-row flex justify-space-around>
